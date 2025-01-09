@@ -14,7 +14,7 @@ export default function Help({ isDark }: { isDark: boolean }) {
           </div>
           <div className={`space-y-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             <p>1. 在左侧菜单选择"词语组合"进入组合页面</p>
-            <p>2. 选择需要组合的词语数量（2-4个）</p>
+            <p>2. 选择需要组合的词语数量（2-5个）</p>
             <p>3. 点击"开始组合"按钮生成随机组合</p>
             <p>4. 观察词语之间的连接关系和权重展示</p>
           </div>
