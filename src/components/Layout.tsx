@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Moon, Menu } from 'lucide-react';
+import { Sun, Moon, Home, Wand2, HelpCircle, Video } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface LayoutProps {
@@ -11,6 +11,13 @@ interface LayoutProps {
 export default function Layout({ children, isDark, toggleTheme }: LayoutProps) {
   const location = useLocation();
   
+  const menuItems = [
+    { path: '/', label: '首页', icon: Home },
+    { path: '/combine', label: '词语组合', icon: Wand2 },
+    { path: '/videos', label: '视频导航', icon: Video },
+    { path: '/help', label: '使用帮助', icon: HelpCircle },
+  ];
+
   return (
     <div className={`min-h-screen tech-grid ${isDark ? 'dark bg-gray-900' : 'bg-gray-100'}`}>
       <div className="flex">
@@ -19,33 +26,25 @@ export default function Layout({ children, isDark, toggleTheme }: LayoutProps) {
           <div className="p-6">
             <h1 className={`text-2xl font-bold ${isDark ? 'tech-text' : 'tech-text-light'}`}>创意组合器</h1>
             <nav className="mt-8">
-              <Link 
-                to="/" 
-                className={`block py-2.5 px-4 rounded transition ${
-                  location.pathname === '/' ? 'tech-button text-white' : 
-                  (isDark ? 'text-gray-300 hover:bg-gray-700/50' : 'text-gray-600 hover:bg-gray-100/50')
-                }`}
-              >
-                首页
-              </Link>
-              <Link 
-                to="/combine" 
-                className={`block py-2.5 px-4 rounded transition ${
-                  location.pathname === '/combine' ? 'tech-button text-white' : 
-                  (isDark ? 'text-gray-300 hover:bg-gray-700/50' : 'text-gray-600 hover:bg-gray-100/50')
-                }`}
-              >
-                词语组合
-              </Link>
-              <Link 
-                to="/help" 
-                className={`block py-2.5 px-4 rounded transition ${
-                  location.pathname === '/help' ? 'tech-button text-white' : 
-                  (isDark ? 'text-gray-300 hover:bg-gray-700/50' : 'text-gray-600 hover:bg-gray-100/50')
-                }`}
-              >
-                使用帮助
-              </Link>
+              {menuItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center py-2.5 px-4 rounded transition ${
+                      location.pathname === item.path
+                        ? 'tech-button text-white'
+                        : isDark
+                        ? 'text-gray-300 hover:bg-gray-700/50'
+                        : 'text-gray-600 hover:bg-gray-100/50'
+                    }`}
+                  >
+                    <Icon size={20} className="mr-2" />
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
           <div className="absolute bottom-0 w-full p-6">
